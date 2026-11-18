@@ -4,6 +4,7 @@ import { fileURLToPath } from 'node:url';
 import { DataSource } from 'typeorm';
 import { getSslOptions } from './db-ssl.js';
 import { Task } from './task.entity.js';
+import { User } from './user.entity.js';
 
 const currentDirectory = dirname(fileURLToPath(import.meta.url));
 
@@ -15,7 +16,7 @@ export default new DataSource({
   password: process.env.DB_PASSWORD,
   database: process.env.DB_DATABASE,
   ssl: getSslOptions(process.env),
-  entities: [Task],
+  entities: [Task, User],
   migrations: [join(currentDirectory, 'migrations/*{.js,.ts}')],
   synchronize: false,
 });
